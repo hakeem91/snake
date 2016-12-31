@@ -9,19 +9,14 @@ struct Config {
 };
 
 
-void menu();
+void menu(struct Config*);
 void config(struct Config);
 void affichage(int, int);
 void affichageDimensions(int, int);
 void affichageDetails(int, int);
 
 
-void menu() {
-  struct Config Config;
-  Config.longueurGrille = 60;
-  Config.hauteurGrille = 40;
-  Config.nombrePastille = 5;
-  Config.tailleSerpent = 10;
+void menu(struct Config* Config) {
 
   ChoisirCouleurDessin(CouleurParNom("green"));
   EcrireTexte(117, 50, "Snake", 2);
@@ -46,7 +41,7 @@ void menu() {
     }
     if ((_X) >= 75 && (_Y) >= 165 && (_X) < 228 && (_Y) < 182) { // Configurer la partie
       fin = 1;
-      config(Config);
+      config((*Config));
     }
     if ((_X) >= 100 && (_Y) >= 215 && (_X) < 203 && (_Y) < 232) { // Quitter le game
       fin = 1;
@@ -55,8 +50,8 @@ void menu() {
 }
 
 void config(struct Config Config) {
-  //int hauteurGrille = 60, longueurGrille = 40, nombrePastille = 5, tailleSerpent = 10;
   int fin = 0;
+
   ChoisirCouleurDessin(CouleurParNom("white"));
   RemplirRectangle(0, 0, 300, 350);
   ChoisirCouleurDessin(CouleurParNom("black"));
@@ -141,7 +136,7 @@ void config(struct Config Config) {
       fin = 1;
       ChoisirCouleurDessin(CouleurParNom("white"));
       RemplirRectangle(0, 0, 300, 350);
-      menu();
+      menu(&Config);
     }
   }
 }
@@ -233,10 +228,16 @@ void affichageDetails(int entier, int choix) {
 }
 
 void main() {
+  struct Config Config;
+  Config.longueurGrille = 60;
+  Config.hauteurGrille = 40;
+  Config.nombrePastille = 5;
+  Config.tailleSerpent = 10;
+
   InitialiserGraphique();
   CreerFenetre(20, 20, 300, 350);
   
-  menu();
+  menu(&Config);
   
   FermerGraphique();
 }
