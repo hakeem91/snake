@@ -63,7 +63,7 @@ void config(struct Config Config) {
   RemplirRectangle(80, 138, 7, 7);
   affichage(Config.longueurGrille, 1);
   ChoisirCouleurDessin(CouleurParNom("lightgrey"));
-  EcrireTexte(143, 140, "x", 1);
+  EcrireTexte(139, 140, "x", 1);
   RemplirRectangle(155, 125, 7, 7);
   RemplirRectangle(155, 138, 7, 7);
   affichage(Config.hauteurGrille, 2);
@@ -85,10 +85,13 @@ void config(struct Config Config) {
   while (!fin) {
     SourisCliquee();
     if ((_X) >= 80 && (_Y) >= 125 && (_X) < 87 && (_Y) < 132) { // longueur ++
-      Config.longueurGrille++;
-      affichage(Config.longueurGrille, 1);
-      _X = 0;
-      _Y = 0;
+      if (Config.longueurGrille >= 99) {}
+      else {
+	Config.longueurGrille++;
+	affichage(Config.longueurGrille, 1);
+	_X = 0;
+	_Y = 0;
+      }
     }
     if ((_X) >= 80 && (_Y) >= 138 && (_X) < 87 && (_Y) < 145) { // longueur --
       Config.longueurGrille--;
@@ -97,10 +100,13 @@ void config(struct Config Config) {
       _Y = 0;
     }
     if ((_X) >= 155 && (_Y) >= 125 && (_X) < 162 && (_Y) < 132) { // hauteur ++
-      Config.hauteurGrille++;
-      affichage(Config.hauteurGrille, 2);
-      _X = 0;
-      _Y = 0;
+      if (Config.hauteurGrille >= 99) {}
+      else {
+	Config.hauteurGrille++;
+	affichage(Config.hauteurGrille, 2);
+	_X = 0;
+	_Y = 0;
+      }
     }
     if ((_X) >= 155 && (_Y) >= 138 && (_X) < 162 && (_Y) < 145) { // hauteur --
       Config.hauteurGrille--;
@@ -115,10 +121,13 @@ void config(struct Config Config) {
       _Y = 0;
     }
     if ((_X) >= 120 && (_Y) >= 203 && (_X) < 127 && (_Y) < 210) { // pastille --
-      Config.nombrePastille--;
-      affichage(Config.nombrePastille, 3);
-      _X = 0;
-      _Y = 0;
+      if (Config.nombrePastille <= 5) {}
+      else {
+	Config.nombrePastille--;
+	affichage(Config.nombrePastille, 3);
+	_X = 0;
+	_Y = 0;
+      }
     }
     if ((_X) >= 120 && (_Y) >= 255 && (_X) < 127 && (_Y) < 262) { // serpent ++
       Config.tailleSerpent++;
@@ -127,12 +136,15 @@ void config(struct Config Config) {
       _Y = 0;
     }
     if ((_X) >= 120 && (_Y) >= 268 && (_X) < 127 && (_Y) < 275) { // serpent --
-      Config.tailleSerpent--;
-      affichage(Config.tailleSerpent, 4);
-      _X = 0;
-      _Y = 0;
+      if (Config.tailleSerpent <= 5) {}
+      else {
+	Config.tailleSerpent--;
+	affichage(Config.tailleSerpent, 4);
+	_X = 0;
+	_Y = 0;
+      }
     }
-    if ((_X) >= 81 && (_Y) >= 300 && (_X) < 304 && (_Y) < 317) { // Revenir au menu
+    if ((_X) >= 81 && (_Y) >= 300 && (_X) < 220 && (_Y) < 317) { // Revenir au menu
       fin = 1;
       ChoisirCouleurDessin(CouleurParNom("white"));
       RemplirRectangle(0, 0, 300, 350);
